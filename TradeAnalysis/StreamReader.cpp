@@ -1,14 +1,28 @@
+/////////////////////////////////////////////////////////////////////////////
+// StreamReader.h - Reads the incoming message stream from the binary file //
+//					and stores the messages in the Message Store provided  //
+// version 1.0                                                             //
+// ----------------------------------------------------------------------- //
+// Copyright © Akhil Panchal, 2015                                         //
+// All rights granted provided that this notice is retained                //
+// ----------------------------------------------------------------------- //
+// Language:		Visual C++, Visual Studio 2015 Enterprise			   //
+// Platform:		Dell Inspiron 17R 5721, Intel Core i5, Windows 10	   //
+// Application:		CSE 687 Project #4, Spring 2015                        //
+// Author:			Akhil Panchal, Syracuse University			           //
+//					(408) 921-0731, ahpancha@syr.edu	                   //
+/////////////////////////////////////////////////////////////////////////////
 
 #include"StreamReader.h"
 
-StreamReader::StreamReader(string filePath, DataStore* dataStore) {
+StreamReader::StreamReader(string filePath, MessageStore* dataStore) {
 	_ds = dataStore;
 	file = filePath;
 	inputFile = new ifstream(file, ifstream::in | ios::binary);
 	outputFile = new ofstream("messages.txt", ofstream::out);
 }
 
-void StreamReader::saveMessages() {
+void StreamReader::saveToStore() {
 	try {
 		while(!inputFile->eof()) {
 			char buffer[22];
@@ -44,7 +58,7 @@ void StreamReader::saveOrderEntryMessage(headerPtr header) {
 	inputFile->read(body, header->msg_len);
 	shared_ptr<Message> msg = make_shared<OrderEntryMessage>(header, body);
 	_ds->saveOrderEntry(msg);
-	*outputFile << msg;
+	//*outputFile << msg;					// Uncomment to see Messages in the output file.
 	delete[] body;
 }
 
@@ -53,7 +67,7 @@ void StreamReader::saveOrderAckMessage(headerPtr header) {
 	inputFile->read(body, header->msg_len);
 	shared_ptr<Message> msg = make_shared<OrderAcknowledgementMessage>(header, body);
 	_ds->saveOrderAck(msg);
-	*outputFile << msg;
+	//*outputFile << msg;					// Uncomment to see Messages in the output file.
 	delete[] body;
 }
 
@@ -62,12 +76,11 @@ void StreamReader::saveOrderFillMessage(headerPtr header) {
 	inputFile->read(body, header->msg_len);
 	shared_ptr<Message> msg = make_shared<OrderFillMessage>(header, body);
 	_ds->saveOrderFill(msg);
-	*outputFile << msg;
+	//*outputFile << msg;					// Uncomment to see Messages in the output file.
 	delete[] body;
 }
 
 StreamReader::~StreamReader() {
-	delete _ds;
 	delete inputFile;
 	delete outputFile;
 }

@@ -1,6 +1,38 @@
 #ifndef MESSAGE_TYPES_H
 #define MESSAGE_TYPES_H
 
+/////////////////////////////////////////////////////////////////////////////
+// MessageTypes.h - Stores information for different message types		   //
+// ----------------------------------------------------------------------- //
+// Copyright © Akhil Panchal, 2015                                         //
+// All rights granted provided that this notice is retained                //
+// ----------------------------------------------------------------------- //
+// Language:		Visual C++, Visual Studio 2015 Enterprise			   //
+// Platform:		Dell Inspiron 17R 5721, Intel Core i5, Windows 10	   //
+// Application:		CSE 687 Project #4, Spring 2015                        //
+// Author:			Akhil Panchal, Syracuse University			           //
+//					(408) 921-0731, ahpancha@syr.edu	                   //
+/////////////////////////////////////////////////////////////////////////////
+/*
+* Module Operations:
+* -------------------
+*	All Message types are struct. Therefore, publicly accessible
+*
+* Required Files:
+* ---------------
+*	Message.h, ,Message.cpp
+*
+* Build Process:
+* --------------
+*	devenv AcunaCodingChallenge.sln /rebuild debug
+*
+* Maintenance History:
+* --------------------
+* ver 1.0 : 21 April 2016
+* - first release
+*
+*/
+
 #include "Message.h"
 #include<string>
 #include<vector>
@@ -20,9 +52,6 @@ struct OrderEntryMessage : public Message {
 	string firm;
 	string termination_string;
 };
-
-
-
 
 struct OrderAcknowledgementMessage : public Message {
 
@@ -47,7 +76,7 @@ struct Group {
 
 struct OrderFillMessage : public Message {
 
-	using gPtr = shared_ptr<Group>;
+	typedef shared_ptr<Group> gPtr;
 	OrderFillMessage(headerPtr header, char*);
 	friend ostream& operator<<(ostream& ostrm, shared_ptr<Message> msg);
 	string showBody();

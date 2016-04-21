@@ -1,3 +1,16 @@
+/////////////////////////////////////////////////////////////////////////////
+// MessageTypes.h - Stores information for different message types		   //
+// ----------------------------------------------------------------------- //
+// Copyright © Akhil Panchal, 2015                                         //
+// All rights granted provided that this notice is retained                //
+// ----------------------------------------------------------------------- //
+// Language:		Visual C++, Visual Studio 2015 Enterprise			   //
+// Platform:		Dell Inspiron 17R 5721, Intel Core i5, Windows 10	   //
+// Application:		CSE 687 Project #4, Spring 2015                        //
+// Author:			Akhil Panchal, Syracuse University			           //
+//					(408) 921-0731, ahpancha@syr.edu	                   //
+/////////////////////////////////////////////////////////////////////////////
+
 #include "MessageTypes.h"
 
 OrderEntryMessage::OrderEntryMessage(headerPtr header, char* buffer) {

@@ -1,12 +1,26 @@
+/////////////////////////////////////////////////////////////////////////////
+// ExchangeAnalyzer.h - Performs Analysis of the messages and answers the  //
+//						questions given in the challenge				   //
+// version 1.0                                                             //
+// ----------------------------------------------------------------------- //
+// Copyright © Akhil Panchal, 2015                                         //
+// All rights granted provided that this notice is retained                //
+// ----------------------------------------------------------------------- //
+// Language:		Visual C++, Visual Studio 2015 Enterprise			   //
+// Platform:		Dell Inspiron 17R 5721, Intel Core i5, Windows 10	   //
+// Application:		CSE 687 Project #4, Spring 2015                        //
+// Author:			Akhil Panchal, Syracuse University			           //
+//					(408) 921-0731, ahpancha@syr.edu	                   //
+/////////////////////////////////////////////////////////////////////////////
 
 #include"ExchangeAnalyzer.h"
 
-ExchangeAnalyzer::ExchangeAnalyzer(DataStore* ds) : _ds(ds){
+ExchangeAnalyzer::ExchangeAnalyzer(MessageStore* ds) : _ds(ds){
 
 }
 
 ExchangeAnalyzer::~ExchangeAnalyzer() {
-	delete _ds;
+
 }
 
 string ExchangeAnalyzer::getMostActiveTrader() {
@@ -140,65 +154,4 @@ map<string, size_t> ExchangeAnalyzer::getTradePerInstrument(unordered_map<uint64
 	}
 
 	return std::move(tradePerInstrument);
-}
-
-
-//--------Alternate Implementation--------
-
-string ExchangeAnalyzer::getMostActiveTrader2() {
-	/*
-	TODO:
-	1. Traverse over MSG_TYP_1 and store client_assigned_id as keys and trader name as value.
-	2. Traverse over MSG_TYP_2 and store order_id as key and client_id as value.
-	3. Traverse over MSG_TYP_3 and for each entry, find total fill_qty and find the original trader by looking up client_id from order_id,
-	and then lookup trader name by client_id.
-	4. Update the fill_qty for that trader.
-	*/
-	unordered_map<uint64_t, string> traders;
-	unordered_map<uint32_t, uint64_t> clients;
-	unordered_map<string, size_t> traderFills;
-	populateTraders(traders);
-	populateClients(clients);
-	populateTraderFills2(traders, clients, traderFills);
-
-
-
-	//-------------Find Max-------------
-	string result = "";
-	int max = 0;
-	for (auto entry : traderFills) {			// Find Max in TraderFills
-		if (entry.second > max)
-			result = entry.first;
-	}
-	return result;
-}
-
-void ExchangeAnalyzer::populateTraderFills2(unordered_map<uint64_t, string> traders,
-	unordered_map<uint32_t, uint64_t>& clients,
-	unordered_map<string, size_t>& traderFills
-	) {
-	size_t max = 0;
-	string mostActiveTrader = "";
-	for (auto msg : _ds->getOrderFills()) {
-		shared_ptr<OrderFillMessage> fill_msg = static_pointer_cast<OrderFillMessage>(msg);  // downcast for accessing message specific info
-
-		string original_trader_name = traders[clients[fill_msg->order_id]];				// lookup in clients and traders to get tradername.
-		uint32_t original_trader_qty = fill_msg->fill_qty;
-		
-		if (traderFills.find(original_trader_name) == traderFills.end())
-			traderFills[original_trader_name] = original_trader_qty;
-		else
-			traderFills[original_trader_name] += original_trader_qty;
-
-		//------------Calculate for other Side----------
-
-		for (auto group : fill_msg->groups) {
-			string trader = group->trader_tag;
-			uint32_t qty = group->qty;
-			if (traderFills.find(trader) == traderFills.end())
-				traderFills[trader] = qty;
-			else
-				traderFills[trader] += qty;
-		}		
-	}
 }

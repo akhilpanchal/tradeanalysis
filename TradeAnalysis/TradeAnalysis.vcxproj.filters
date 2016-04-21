@@ -27,10 +27,10 @@
     <ClInclude Include="StreamReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DataStore.h">
+    <ClInclude Include="ExchangeAnalyzer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ExchangeAnalyzer.h">
+    <ClInclude Include="MessageStore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,10 +47,10 @@
     <ClCompile Include="StreamReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DataStore.cpp">
+    <ClCompile Include="ExchangeAnalyzer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExchangeAnalyzer.cpp">
+    <ClCompile Include="MessageStore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

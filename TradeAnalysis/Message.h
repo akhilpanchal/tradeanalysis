@@ -1,6 +1,36 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
+/////////////////////////////////////////////////////////////////////////////
+// Message.h - Abstract base class that stores the common properties of   //
+//				a message i.e. the header								   //
+//																		   //
+// version 1.0                                                             //
+// ----------------------------------------------------------------------- //
+// Copyright © Akhil Panchal, 2015                                         //
+// All rights granted provided that this notice is retained                //
+// ----------------------------------------------------------------------- //
+// Language:		Visual C++, Visual Studio 2015 Enterprise			   //
+// Platform:		Dell Inspiron 17R 5721, Intel Core i5, Windows 10	   //
+// Application:		CSE 687 Project #4, Spring 2015                        //
+// Author:			Akhil Panchal, Syracuse University			           //
+//					(408) 921-0731, ahpancha@syr.edu	                   //
+/////////////////////////////////////////////////////////////////////////////
+/*
+* Required Files:
+* ---------------
+*	Message.h, ,Message.cpp
+*
+* Build Process:
+* --------------
+*	devenv AcunaCodingChallenge.sln /rebuild debug
+*
+* Maintenance History:
+* --------------------
+* ver 1.0 : 21 April 2016
+* - first release
+*
+*/
 #include<memory>
 #include<string>
 #include<iostream>
@@ -9,7 +39,7 @@ using namespace std;
 
 struct Header;
 
-using headerPtr = shared_ptr<Header>;
+typedef shared_ptr<Header> headerPtr;
 
 struct Header {
 	uint16_t marker;

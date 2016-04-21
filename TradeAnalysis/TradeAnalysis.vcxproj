@@ -118,7 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="DataStore.h" />
+    <ClInclude Include="MessageStore.h" />
     <ClInclude Include="ExchangeAnalyzer.h" />
     <ClInclude Include="Executive.h" />
     <ClInclude Include="Message.h" />
@@ -126,7 +126,7 @@
     <ClInclude Include="StreamReader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataStore.cpp" />
+    <ClCompile Include="MessageStore.cpp" />
     <ClCompile Include="ExchangeAnalyzer.cpp" />
     <ClCompile Include="Executive.cpp" />
     <ClCompile Include="Message.cpp" />
