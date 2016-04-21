@@ -24,8 +24,7 @@ private:
 	string file;
 	ifstream *inputFile;
 	ofstream *outputFile;
-	unordered_map<uint8_t, int> msg_type_count;
-	int total_count;
+	
 };
 
 

@@ -5,7 +5,7 @@
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerCommandArguments>E:\GitHub\AcunaCodingChallenge\TestFiles\input.bin</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>E:\GitHub\AcunaCodingChallenge\TestFiles\example_data_file.bin</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

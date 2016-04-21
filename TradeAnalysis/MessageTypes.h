@@ -5,12 +5,10 @@
 #include<string>
 #include<vector>
 
-class OrderEntryMessage : public Message {
-public:
+struct OrderEntryMessage : public Message {
 	OrderEntryMessage(headerPtr header, char*);
 	friend ostream& operator<<(ostream& ostrm, shared_ptr<Message> msg);
 	string showBody();
-private:
 	uint64_t price;
 	uint32_t qty;
 	string instrument;
@@ -26,13 +24,12 @@ private:
 
 
 
-class OrderAcknowledgementMessage : public Message {
+struct OrderAcknowledgementMessage : public Message {
 
-public:
 	OrderAcknowledgementMessage(headerPtr header, char*);
 	friend ostream& operator<<(ostream& ostrm, shared_ptr<Message> msg);
 	string showBody();
-private:
+
 	uint32_t order_id;
 	uint64_t client_id;
 	uint8_t order_status;
@@ -48,14 +45,13 @@ struct Group {
 	string show();
 };
 
-class OrderFillMessage : public Message {
+struct OrderFillMessage : public Message {
 
-public:
 	using gPtr = shared_ptr<Group>;
 	OrderFillMessage(headerPtr header, char*);
 	friend ostream& operator<<(ostream& ostrm, shared_ptr<Message> msg);
 	string showBody();
-private:
+
 	uint32_t order_id;
 	uint64_t fill_price;
 	uint32_t fill_qty;

@@ -5,6 +5,7 @@
 #include"StreamReader.h"
 #include"DataStore.h"
 #include"Message.h"
+#include"ExchangeAnalyzer.h"
 
 using namespace std;
 

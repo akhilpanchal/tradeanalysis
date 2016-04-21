@@ -119,6 +119,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DataStore.h" />
+    <ClInclude Include="ExchangeAnalyzer.h" />
     <ClInclude Include="Executive.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageTypes.h" />
@@ -126,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataStore.cpp" />
+    <ClCompile Include="ExchangeAnalyzer.cpp" />
     <ClCompile Include="Executive.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MessageTypes.cpp" />

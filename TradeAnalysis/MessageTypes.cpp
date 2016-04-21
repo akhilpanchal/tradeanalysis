@@ -105,9 +105,9 @@ Group::Group(char* buffer) {
 
 string Group::show() {
 	string group = "Group:\n";
-	group += "\t\tfirm_id" + to_string(firm_id) +"\n";
-	group += "\t\ttrader_tag" + trader_tag +"\n";
-	group += "\t\tqty" + to_string(qty) + "\n\n";
+	group += "\t\tfirm_id: " + to_string(firm_id) +"\n";
+	group += "\t\ttrader_tag: " + trader_tag +"\n";
+	group += "\t\tqty: " + to_string(qty) + "\n\n";
 	return group;
 }
 

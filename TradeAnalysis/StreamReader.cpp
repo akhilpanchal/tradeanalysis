@@ -10,14 +10,13 @@ StreamReader::StreamReader(string filePath, DataStore* dataStore) {
 
 void StreamReader::saveMessages() {
 	try {
-		while(inputFile->good()) {
+		while(!inputFile->eof()) {
 			char buffer[22];
 			inputFile->read(buffer, 22);
 			headerPtr header = make_shared<Header>();
 			header->buildHeaderFromBuffer(buffer);
-			msg_type_count[header->msg_type]++;				// Increament count of message type
-			total_count++;
-
+			if (!inputFile->good() || inputFile->eof())
+				break;
 			switch (header->msg_type) {
 				case 1:
 					this->saveOrderEntryMessage(header);
@@ -44,6 +43,7 @@ void StreamReader::saveOrderEntryMessage(headerPtr header) {
 	char *body = new char[header->msg_len];
 	inputFile->read(body, header->msg_len);
 	shared_ptr<Message> msg = make_shared<OrderEntryMessage>(header, body);
+	_ds->saveOrderEntry(msg);
 	*outputFile << msg;
 	delete[] body;
 }
@@ -52,6 +52,7 @@ void StreamReader::saveOrderAckMessage(headerPtr header) {
 	char* body = new char[header->msg_len];
 	inputFile->read(body, header->msg_len);
 	shared_ptr<Message> msg = make_shared<OrderAcknowledgementMessage>(header, body);
+	_ds->saveOrderAck(msg);
 	*outputFile << msg;
 	delete[] body;
 }
@@ -60,6 +61,7 @@ void StreamReader::saveOrderFillMessage(headerPtr header) {
 	char* body = new char[header->msg_len];
 	inputFile->read(body, header->msg_len);
 	shared_ptr<Message> msg = make_shared<OrderFillMessage>(header, body);
+	_ds->saveOrderFill(msg);
 	*outputFile << msg;
 	delete[] body;
 }

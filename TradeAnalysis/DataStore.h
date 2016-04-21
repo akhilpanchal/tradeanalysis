@@ -3,6 +3,7 @@
 
 #include<memory>
 #include<vector>
+#include<unordered_map>
 #include<iostream>
 #include"Message.h"
 
@@ -12,10 +13,24 @@ using msgPtr = shared_ptr<Message>;
 
 class DataStore {
 public:
-	void add(msgPtr);
+	DataStore();
+	void saveOrderEntry(msgPtr msg);
+	void saveOrderAck(msgPtr msg);
+	void saveOrderFill(msgPtr msg);
+
+	vector<msgPtr> getOrderEntries(){ return orderEntries; }
+	vector<msgPtr> getOrderAcks() { return orderAcks; }
+	vector<msgPtr> getOrderFills() { return orderFills; }
+
+	int getCountByMsgType(int type = 0);
 	void show();
 private:
-	vector<msgPtr> _container;
+	vector<msgPtr> orderEntries;
+	vector<msgPtr> orderAcks;
+	vector<msgPtr> orderFills;
+	unordered_map<uint8_t, int> msg_type_count;
+	int total_count;
+
 };
 
 
