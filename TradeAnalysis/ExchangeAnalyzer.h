@@ -6,7 +6,7 @@
 //						questions given in the challenge				   //
 // version 1.0                                                             //
 // ----------------------------------------------------------------------- //
-// Copyright © Akhil Panchal, 2015                                         //
+// Copyright © Akhil Panchal, 2016                                         //
 // All rights granted provided that this notice is retained                //
 // ----------------------------------------------------------------------- //
 // Language:		Visual C++, Visual Studio 2015 Enterprise			   //
