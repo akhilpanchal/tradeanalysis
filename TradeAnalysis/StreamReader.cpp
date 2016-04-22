@@ -42,7 +42,7 @@ void StreamReader::saveToStore() {
 					this->saveOrderFillMessage(header);
 					break;
 				default:
-					throw exception("Invalid message_type in Header!");
+					throw invalid_argument("Invalid Message Type detected!");
 					break;
 			}
 		}

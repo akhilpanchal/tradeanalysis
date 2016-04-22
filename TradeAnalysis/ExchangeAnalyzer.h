@@ -70,7 +70,7 @@ private:
 
 	void populateTraders(unordered_map<uint64_t, string>& traders);
 	void populateClients(unordered_map<uint32_t, uint64_t>& clients);
-	void populateTraderFills(unordered_map<uint64_t, string> traders,
+	void populateTraderFills(unordered_map<uint64_t, string>& traders,
 							unordered_map<uint32_t, uint64_t>& clients,
 							unordered_map<string, size_t>& traderFills);
 	size_t getFillQty(shared_ptr<OrderFillMessage> fill_msg);

@@ -61,16 +61,15 @@ void ExchangeAnalyzer::populateClients(unordered_map<uint32_t, uint64_t>& client
 	}
 }
 
-void ExchangeAnalyzer::populateTraderFills( unordered_map<uint64_t, string> traders,
+void ExchangeAnalyzer::populateTraderFills( unordered_map<uint64_t, string>& traders,
 											unordered_map<uint32_t, uint64_t>& clients,
 											unordered_map<string, size_t>& traderFills
 											) {
-	size_t max = 0;
-	string mostActiveTrader = "";
 	for (auto msg : _ds->getOrderFills()) {
 		shared_ptr<OrderFillMessage> fill_msg = static_pointer_cast<OrderFillMessage>(msg);  // downcast for accessing message specific info
 		
-		string trader_name = traders[clients[fill_msg->order_id]];				// lookup in clients and traders to get tradername.
+		uint64_t t = clients[fill_msg->order_id];
+		string trader_name = traders[t];				// lookup in clients and traders to get tradername.
 		size_t total_qty = getFillQty(fill_msg);
 		
 		if (traderFills.find(trader_name) == traderFills.end())
